@@ -7,15 +7,15 @@ import './header.styles.scss'
 
 const Header = () => (
   <div className="header">
-    <Link to="/">
+    <Link to="/crwn-clothing">
       <Logo className="logo-container"/>
     </Link>
     <div className="options">
-      <Link className="option" to="/shop">
+      <Link className="option" to="/crwn-clothing/shop">
         SHOP
       </Link>
-      <Link className="option" to="/shop">
-        CONTACT US
+      <Link className="option" to="/crwn-clothing/signin">
+        LOG IN
       </Link>
     </div>
 

@@ -19,10 +19,10 @@ function App() {
     <div>
       <Header/>
       <Switch>
-        <Route exact path="/" component={HomePage}/>
-        <Route exact path="/shop" component={ShopPage}/>
-        <Route exact path="/shop/hats" component={HatsPage}/>
-        <Route exact path="/signin" component={SignInAndSignUpPage}/>
+        <Route exact path="/crwn-clothing" component={HomePage}/>
+        <Route path="/crwn-clothing/shop" component={ShopPage}/>
+        <Route path="/crwn-clothing/shop/hats" component={HatsPage}/>
+        <Route path="/crwn-clothing/signin" component={SignInAndSignUpPage}/>
       </Switch>
     </div>
   );
