@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom'
 
 import './App.css';
 
@@ -13,8 +13,6 @@ import { connect } from 'react-redux'
 import { setCurrentUser } from './redux/user/user.actions';
 
 class App extends React.Component {
-  const setCurrentUser = this.props;
-
   unsubscribeFromAuth = null;
 
   componentDidMount() {
@@ -36,7 +34,8 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/crwn-clothing" component={HomePage}/>
           <Route path="/crwn-clothing/shop" component={ShopPage}/>
-          <Route path="/crwn-clothing/signin" component={SignInAndSignUpPage}/>
+          <Route path="/crwn-clothing/signin" render={
+            () => this.props.currentUser ? <Redirect to="/"/> :<SignInAndSignUpPage/>}/>
         </Switch>
       </div>
     );
