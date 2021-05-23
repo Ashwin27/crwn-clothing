@@ -18,19 +18,17 @@ class App extends React.Component {
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
-        const userRef = createUserProfileDocument(userAuth);
+        const userRef = await createUserProfileDocument(userAuth);
 
-        (await userRef).onSnapshot(snapShot => {
-          this.setState({
-              currentUser: { 
-                id: snapShot.id,
-                ...snapShot.data() 
-              }
+        userRef.onSnapshot(snapShot => {
+          this.props.setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
           }, () => { console.log(this.state, snapShot); });
         });
       }
       else {
-        this.setState({ currentUser: userAuth });
+        this.props.setCurrentUser(userAuth);
       }
     });
   }
@@ -47,15 +45,20 @@ class App extends React.Component {
           <Route exact path="/crwn-clothing" component={HomePage}/>
           <Route path="/crwn-clothing/shop" component={ShopPage}/>
           <Route path="/crwn-clothing/signin" render={
-            () => this.props.currentUser ? <Redirect to="/"/> :<SignInAndSignUpPage/>}/>
+            () => this.props.currentUser ? 
+            <Redirect to="/crwn-clothing"/>:<SignInAndSignUpPage/>}/>
         </Switch>
       </div>
     );
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
