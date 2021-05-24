@@ -8,7 +8,7 @@ import cartReducer from './cart/cart.reducer';
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: [] // User is reducer is persisted in firebase.
+  whitelist: ['cart'] // User is reducer is persisted in firebase.
 };
 
 const rootReducer = combineReducers({
