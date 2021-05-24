@@ -42,6 +42,7 @@ class App extends React.Component {
       <div>
         <Header/>
         <Switch>
+          <Redirect from="*//*" to="*/*" />
           <Route exact path="/crwn-clothing" component={HomePage}/>
           <Route path="/crwn-clothing/shop" component={ShopPage}/>
           <Route path="/crwn-clothing/signin" render={
